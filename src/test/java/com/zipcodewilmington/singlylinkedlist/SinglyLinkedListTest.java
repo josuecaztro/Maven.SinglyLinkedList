@@ -44,6 +44,13 @@ public class SinglyLinkedListTest {
 
     @Test
     public void find() {
+        SinglyLinkedList exampleList = new SinglyLinkedList();
+        exampleList.add("Josue");
+        exampleList.add("Joshua");
+        exampleList.add("George");
+        int actual = exampleList.find("Brian");
+        int expected = -1;
+        Assert.assertEquals(actual,expected);
     }
 
     @Test
@@ -68,9 +75,25 @@ public class SinglyLinkedListTest {
 
     @Test
     public void copy() {
+        SinglyLinkedList exampleList = new SinglyLinkedList();
+        exampleList.add("Josue");
+        exampleList.add("Joshua");
+        SinglyLinkedList cloneList = new SinglyLinkedList();
+        cloneList = cloneList.copy(exampleList);
+        String actual = "Joshua";
+        String expected = cloneList.get(1);
+        Assert.assertEquals(actual,expected);
     }
 
     @Test
     public void sort() {
+        SinglyLinkedList exampleList = new SinglyLinkedList();
+        exampleList.add("Zebras");
+        exampleList.add("Giraffes");
+        exampleList.add("Hippos");
+        exampleList.sortList();
+        String actual = "Zebras";
+        String expected = exampleList.get(2);
+        Assert.assertEquals(actual,expected);
     }
 }

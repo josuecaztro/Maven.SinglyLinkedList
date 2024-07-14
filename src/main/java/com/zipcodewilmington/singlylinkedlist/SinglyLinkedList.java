@@ -1,12 +1,16 @@
 package com.zipcodewilmington.singlylinkedlist;
 
+import org.w3c.dom.ls.LSOutput;
+
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
  * Created by leon on 1/10/18.
  */
-    public class SinglyLinkedList {
+    public class SinglyLinkedList implements Comparable{
     private Node head;
     private Node tail;
     private int listSize;
@@ -18,7 +22,9 @@ import java.util.LinkedList;
         this.listSize = 0;
     }
 
-    public class Node {
+
+
+    public class Node implements Comparable<Node> {
         private String data;
         private Node next;
 
@@ -26,14 +32,15 @@ import java.util.LinkedList;
             this.data = data;
             this.next = null;
         }
+
+        @Override
+        public int compareTo(Node o) {
+            if (this.data.compareTo(o.data) < 0){
+                o = this;
+            }
+            return 0;
+        }
     }
-
-//    get -- returns the element at the specified index
-//    copy -- returns a new linked list containing the same values
-//            (look up deep versus shallow copy)
-//    sort -- sorts the list using your algorithm of choice.
-//    You must perform the sorting yourself (no fair using someone else's library)
-
 
     public void add (String data){
         Node node = new Node(data);
@@ -100,6 +107,26 @@ import java.util.LinkedList;
             }
         }
         return null;
+    }
+
+    //    copy -- returns a new linked list containing the same values(DEEP COPY)
+    public SinglyLinkedList copy (SinglyLinkedList exampleList){
+        SinglyLinkedList cloneList;
+        cloneList = exampleList;
+        return cloneList;
+    }
+
+    //    sort -- sorts the list using your algorithm of choice.
+//    You must perform the sorting yourself (no fair using someone else's library)
+    public void sortList(){
+        for (int i = 0; i < this.size() - 1; i++){
+            this.get(i).compareTo(this.get(i + 1));
+        }
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
     }
 
 
