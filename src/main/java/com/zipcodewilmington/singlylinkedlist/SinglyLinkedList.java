@@ -10,7 +10,7 @@ import java.util.LinkedList;
 /**
  * Created by leon on 1/10/18.
  */
-    public class SinglyLinkedList implements Comparable{
+    public class SinglyLinkedList {
     private Node head;
     private Node tail;
     private int listSize;
@@ -21,7 +21,6 @@ import java.util.LinkedList;
         this.tail = null;
         this.listSize = 0;
     }
-
 
 
     public class Node implements Comparable<Node> {
@@ -35,16 +34,16 @@ import java.util.LinkedList;
 
         @Override
         public int compareTo(Node o) {
-            if (this.data.compareTo(o.data) < 0){
+            if (this.data.compareTo(o.data) < 0) {
                 o = this;
             }
             return 0;
         }
     }
 
-    public void add (String data){
+    public void add(String data) {
         Node node = new Node(data);
-        if (listSize == 0){
+        if (listSize == 0) {
             head = node;
             tail = node;
         } else {
@@ -54,13 +53,13 @@ import java.util.LinkedList;
         listSize++;
     }
 
-    public void remove (int exampleIndex){
+    public void remove(int exampleIndex) {
         if (this.head.data.equals(this.get(exampleIndex))) {
             this.head = this.head.next;
             this.listSize--;
         }
         Node currentNode = this.head;
-        while (currentNode.next != null){
+        while (currentNode.next != null) {
             if (currentNode.next.data.equals(this.get(exampleIndex))) {
                 currentNode.next = currentNode.next.next;
                 this.listSize--;
@@ -70,7 +69,7 @@ import java.util.LinkedList;
 
     }
 
-    public int size(){
+    public int size() {
         return this.listSize;
     }
 
@@ -84,25 +83,25 @@ import java.util.LinkedList;
     }
 
     //    find -- returns the element's index if it is in the list, -1 otherwise
-    public int find(String example){
-         for (int i = 0; i < this.size(); i++){
-             if (this.get(i).equals(example)){
-                 return i;
-             }
-         }
-              return -1;
+    public int find(String example) {
+        for (int i = 0; i < this.size(); i++) {
+            if (this.get(i).equals(example)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
-    public String get(int index){
-        if (index == 0){
+    public String get(int index) {
+        if (index == 0) {
             return this.head.data;
         }
 
         int currentIndex = 0;
         Node currentNode = this.head;
-        while (currentNode.next != null){
+        while (currentNode.next != null) {
             currentNode = currentNode.next;
-            if (++currentIndex == index){
+            if (++currentIndex == index) {
                 return currentNode.data;
             }
         }
@@ -110,7 +109,7 @@ import java.util.LinkedList;
     }
 
     //    copy -- returns a new linked list containing the same values(DEEP COPY)
-    public SinglyLinkedList copy (SinglyLinkedList exampleList){
+    public SinglyLinkedList copy(SinglyLinkedList exampleList) {
         SinglyLinkedList cloneList;
         cloneList = exampleList;
         return cloneList;
@@ -118,17 +117,27 @@ import java.util.LinkedList;
 
     //    sort -- sorts the list using your algorithm of choice.
 //    You must perform the sorting yourself (no fair using someone else's library)
-    public void sortList(){
-        for (int i = 0; i < this.size() - 1; i++){
-            this.get(i).compareTo(this.get(i + 1));
+    public void sortList() {
+        Node current = head, index;
+        String temp;
+
+        if (head == null) {
+            return;
+        }
+
+        while (current != null) {
+            index = current.next;
+            while (index != null) {
+                if (current.data.compareTo(index.data) > 0) {
+                    temp = current.data;
+                    current.data = index.data;
+                    index.data = temp;
+                }
+                index = index.next;
+            }
+            current = current.next;
         }
     }
-
-    @Override
-    public int compareTo(Object o) {
-        return 0;
-    }
-
 
 }
 
